@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Categories</title>
+</head>
+<body>
+    <header>
+        <a href="/">home</a>
+        <a href="/categories">categories</a>
+
+    </header>
+    <h1>Categories</h1>
+    <form method="POST" action="/categories">
+        <label for="name">New category: </label>
+        <input type="text" name="category-name" id="category-name-input">
+        <input type="submit" value="submit">
+    </form>
+    <% categories.map(category => { %>
+        <div class="category">
+            <div class="category-name">
+                <%= category.name %>
+            </div>
+            <div class="category-count">
+                <%= category.count %>
+            </div>
+        </div>
+    <% }) %>
+    
+</body>
+</html>

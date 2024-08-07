@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> <%= category.name %></title>
+    <script>
+        function updateAction() {
+            var categoryInput = document.getElementById('category-input').value;
+            document.getElementById('dynamicForm').action = '/categories/' + categoryInput;
+        }
+    </script>
+</head>
+<body>
+    <header>
+        <a href="/">home</a>
+        <a href="/categories">categories</a>
+
+    </header>
+    <h1><%= category.name %></h1>
+    <form method="POST" action=<%= "/categories/" + category.name %>>
+        <label for="name">Name: </label>
+        <input type="text" name="name" id="name-input">
+        <input type="submit" value="submit">
+    </form>
+    <% items.map(item => { %>
+        <div class="item">
+            <div class="item-name">
+                <%= item.name %>
+            </div>
+            <div class="item-category">
+                <%= category.name %>
+            </div>
+        </div>
+    <% }) %>
+    
+</body>
+</html>
