@@ -1,0 +1,14 @@
+{
+  "name": "warehouse-inventory-tracker",
+  "version": "1.0.0",
+  "description": "A website to be used for inventory management",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.19.2"
+  }
+}
