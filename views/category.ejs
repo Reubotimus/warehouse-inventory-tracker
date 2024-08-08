@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title> <%= category %></title>
+    <link rel="stylesheet" href="/style.css">
 </head>
 <body>
     <header>
@@ -12,17 +13,17 @@
 
     </header>
     <h1><%= category %></h1>
-    <form method="POST" action=<%= "/categories/" + category %>>
+    <form method="POST" action=<%= encodeURI("/categories/" + category) %>>
         <label for="name">Name: </label>
         <input type="text" name="name" id="name-input">
         <input type="submit" value="submit">
     </form>
     <% items.map(item => { %>
-        <div class="item">
-            <div class="item-name">
+        <div class="row">
+            <div class="left">
                 <%= item.name %>
             </div>
-            <div class="item-category">
+            <div class="right">
                 <%= category %>
             </div>
         </div>

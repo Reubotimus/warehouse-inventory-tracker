@@ -1,9 +1,9 @@
 const express = require('express');
 const indexRouter = express.Router();
-const {checkValidCategory, createItem, createCategory, renderCategory, renderCategories, renderItems} = require('../controlers/indexControler');
+const {handleIndexPost, checkValidCategory, createItem, createCategory, renderCategory, renderCategories, renderItems} = require('../controlers/indexControler');
 
 indexRouter.get('/', renderItems);
-indexRouter.post('/', (req, res) => res.redirect(307, '/categories/' + req.body.category));
+indexRouter.post('/', handleIndexPost);
 
 indexRouter.get('/categories', renderCategories);
 indexRouter.post('/categories', createCategory);

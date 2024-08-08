@@ -14,8 +14,8 @@ async function renderCategories(req, res) {
 
 async function renderCategory(req, res) {
     res.render('category', {
-        items: await getItemsCategory(req.params.category),
-        category: req.params.category
+        items: await getItemsCategory(decodeURIComponent(req.params.category)),
+        category: decodeURIComponent(req.params.category)
     });
 }
 
@@ -32,21 +32,20 @@ async function createCategory(req, res) {
 }
 
 async function createItem(req, res) {
-    await postItem(req.body.name, req.params.category);
-    res.redirect('/')
-}
-
-async function testController(req, res) {
-    const result = await testDb();
-    // console.log(result);
-    res.send("worked");
+    await postItem(req.body.name, decodeURI(req.params.category));
+    if (Object.keys(req.query).length == 1) {
+        res.redirect('/');
+    } else {
+        res.redirect(encodeURI('/categories/' + req.params.category))
+    }
 }
 
 async function checkValidCategory(req, res, next) {
     const categories = await getCategories();
+    const searchedCategory = decodeURIComponent(req.params.category);
     let validCategory = false;
     categories.forEach(category => {
-        if (category.name == req.params.category) {
+        if (category.name == searchedCategory) {
             validCategory = true;
         }
     });
@@ -57,4 +56,9 @@ async function checkValidCategory(req, res, next) {
     next()
 }
 
-module.exports = {checkValidCategory, testController, createItem, createCategory, renderCategory, renderCategories, renderItems}
+function handleIndexPost(req, res) {
+    console.log(req.body)
+    res.redirect(307, encodeURI('/categories/' + req.body.category + '?index=1'))
+}
+
+module.exports = {handleIndexPost, checkValidCategory, createItem, createCategory, renderCategory, renderCategories, renderItems}
