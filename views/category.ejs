@@ -3,13 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> <%= category.name %></title>
-    <script>
-        function updateAction() {
-            var categoryInput = document.getElementById('category-input').value;
-            document.getElementById('dynamicForm').action = '/categories/' + categoryInput;
-        }
-    </script>
+    <title> <%= category %></title>
 </head>
 <body>
     <header>
@@ -17,8 +11,8 @@
         <a href="/categories">categories</a>
 
     </header>
-    <h1><%= category.name %></h1>
-    <form method="POST" action=<%= "/categories/" + category.name %>>
+    <h1><%= category %></h1>
+    <form method="POST" action=<%= "/categories/" + category %>>
         <label for="name">Name: </label>
         <input type="text" name="name" id="name-input">
         <input type="submit" value="submit">
@@ -29,7 +23,7 @@
                 <%= item.name %>
             </div>
             <div class="item-category">
-                <%= category.name %>
+                <%= category %>
             </div>
         </div>
     <% }) %>

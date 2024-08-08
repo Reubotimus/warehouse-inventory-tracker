@@ -1,15 +1,19 @@
 const express = require('express');
 const indexRouter = express.Router();
+const {checkValidCategory, createItem, createCategory, renderCategory, renderCategories, renderItems} = require('../controlers/indexControler');
 
-indexRouter.get('/', (req, res) => res.render('index', {categories: [], items: []}));
+indexRouter.get('/', renderItems);
+indexRouter.post('/', (req, res) => res.redirect(307, '/categories/' + req.body.category));
 
-indexRouter.get('/categories', (req, res) => res.render('categories', {categories: []}));
-indexRouter.post('/categories', (req, res) => res.send('new category'));
+indexRouter.get('/categories', renderCategories);
+indexRouter.post('/categories', createCategory);
 indexRouter.put('/categories', (req, res) => res.send('update category'));
 indexRouter.delete('/categories', (req, res) => res.send('delete category'));
 
-indexRouter.get('/categories/:category', (req, res) => res.render('category', {category: {name: "something"}, items: []}));
-indexRouter.post('/categories/:category', (req, res) => res.send('new item with category ' + req.params.category));
+
+indexRouter.use('/categories/:category', checkValidCategory);
+indexRouter.get('/categories/:category', renderCategory);
+indexRouter.post('/categories/:category', createItem);
 indexRouter.put('/categories/:category', (req, res) => res.send('update item with category ' + req.params.category));
 indexRouter.delete('/categories/:category', (req, res) => res.send('delete item with category ' + req.params.category));
 

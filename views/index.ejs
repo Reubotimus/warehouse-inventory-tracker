@@ -9,18 +9,18 @@
     <header>
         <a href="/">home</a>
         <a href="/categories">categories</a>
-
     </header>
     <h1>Items</h1>
-    <form action="post">
+    <form method="POST" action="/">
         <label for="name">Name: </label>
         <input type="text" name="name" id="name-input">
         <label for="category">Category: </label>
         <select name="category" id="category-input">
             <% categories.map(category => { %> 
-                <option value=<%=category%>><%=category%></option>
+                <option value=<%=category.name%>><%=category.name%></option>
             <% }) %>
         </select>
+        <input type="submit" value="submit">
     </form>
     <% items.map(item => { %>
         <div class="item">
